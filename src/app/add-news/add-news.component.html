@@ -1,0 +1,26 @@
+<h4>Add news</h4>
+<form (ngSubmit)= "addNews()">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="dateInput">Date</label>
+            <input type="date" id="dateInput" name="dateInput" class="form-control" [(ngModel)] = "date" required>
+        </div>
+        <div class="col-md-6">
+            <label for="countryInput">country</label>
+            <input type="string" id="countryInput" name="countryInput" class="form-control" [(ngModel)] ="country" required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class=" col-12">
+            <label for="descriptionInput">Description</label>
+            <input type="textarea" 
+                id="descriptionInput" 
+                name="descriptionInput" 
+                class="form-control" 
+                placeholder="what do i want to state?"
+                [(ngModel)] = "description"
+                required>
+        </div>
+    </div>
+    <button class=" btn btn-primary mb-4">Add</button>
+</form>

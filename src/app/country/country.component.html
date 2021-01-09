@@ -1,0 +1,127 @@
+<div class="row">
+    <div class="col-md-6 text-right">
+        <img src="https://firebasestorage.googleapis.com/v0/b/covid-19-a8e77.appspot.com/o/covid-4948866_1920.jpg?alt=media&token=c21b5c15-bbd7-443f-a3ff-33bf54b6bd74" 
+             alt="logo" 
+             class="rounded-circle"
+             style="width: 11%;"/>
+    </div>
+    <div class="col-md-6">
+        <h3>Covid-19</h3>
+    </div>
+</div>
+<div class="text-center">
+    <h5 >Live Updates and Statistics</h5>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-active"></tr>
+        <td colspan="2" class='mt-5 mb-10 text-center'><a href="javascript:void(0)" (click)="goBack()">Worldwide</a>>{{countryName}}</td>
+    </thead>
+    <tbody>
+        <tr class="table-warning">
+            <td>Total Cases</td>
+            <td>{{country.TotalConfirmed}} </td>
+        </tr>
+        <tr class="table-warning">
+            <td>New Cases</td>
+            <td>{{country.NewConfirmed}}</td>
+        </tr>
+        <tr class="table-warning">
+            <td>Active Cases</td>
+            <td>{{country.TotalConfirmed - country.TotalRecovered}}</td>
+        </tr>
+        <tr class="table-primary">
+            <td>Total Recovered</td>
+            <td>{{country.TotalRecovered}}</td>
+        </tr>
+        <tr class="table-primary">
+            <td>New Recovered</td>
+            <td>{{country.NewRecovered}}</td>
+        </tr>
+        <tr class="table-primary">
+            <td>Recovery Rate</td>
+            <td>{{country.TotalRecovered * 100 / country.TotalConfirmed | number : '.2-2'}}%</td>
+        </tr>
+        <tr class="table-danger">
+            <td>Total Deaths</td>
+            <td>{{country.TotalDeaths}}</td>
+        </tr>
+        <tr class="table-danger">
+            <td>New Deaths</td>
+            <td>{{country.NewDeaths}}</td>
+        </tr>
+        <tr class="table-danger">
+            <td>Mortality Rate</td>
+            <td>{{country.TotalDeaths * 100 / country.TotalConfirmed | number : '.2-2'}}%</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-5">
+    <div class="p-3 mb-2 bg-secondary text-white">Corona Virus Cases Distribution {{countryName}}</div>
+    <canvas id="mypieChart">{{pieChart}}</canvas>
+</div>
+
+<div class="mt-5">
+    <div class="p-3 mb-2 bg-secondary text-white">Daily Corona Virus Cases in {{countryName}}</div>
+</div>
+
+<div>
+    <canvas id="barChart">{{barChart}}</canvas>
+</div> 
+
+<div class="mt-5">
+    <div class="p-3 mb-2 bg-secondary text-white">Total Virus Cases in {{countryName}}</div>
+</div>
+
+<div>
+    <canvas id="lineChart">{{lineChart}}</canvas>
+</div> 
+
+
+
+<div class="my-3" *ngIf="!news || news.length == 0">
+    <h4 > No News for {{countryName}} </h4>
+</div>
+
+<div class="my-3" *ngIf="news && news.length > 0">
+    <h4>News</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>User Name</th>
+                <th>World wide/country</th>
+                <th>Description </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor= "let new of news">
+                <td>{{new.date.toDate() | date}}</td>
+                <td>{{new.userName}}</td>
+                <td>{{new.country}}</td>
+                <td>{{new.description}}</td>
+            </tr>
+        </tbody>
+    
+    </table>
+</div>
+<app-add-news></app-add-news>
+
+<div class="row mt-4">
+    <div class="col-sm-6">
+        <h3>{{user.displayName}}</h3>
+    </div>
+    <div class="col-sm-6 text-right">
+        <button class="btn btn-danger" (click) = "countryService.signOut()">Sign Out</button>
+    </div>
+</div>
+
+<div class="mt-5">
+    <div class="p-3 mb-2 bg-gradient-secondary text-center">
+        <footer>
+            <p>Data source <a href="https://covid19api.com">COVID-19 API /Johns Hopkins CSSE</a></p>
+        </footer>
+    </div>
+</div>
